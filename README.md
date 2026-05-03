@@ -1,9 +1,7 @@
 # Redirect4D-Bench
 
-Redirect4D-Bench evaluates camera redirection for monocular dynamic videos.
-The public Hugging Face dataset contains generated benchmark assets. Source RGB
-is included only for the two public sample tracks; full-dataset source RGB is
-provided separately through a gated Hugging Face dataset.
+Redirect4D-Bench is a benchmark for evaluating camera redirection on monocular
+dynamic videos.
 
 ## Install
 
