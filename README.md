@@ -59,7 +59,7 @@ The preview shows:
 
 ## Full Dataset
 
-Download public assets:
+Download public assets, about 54 GB:
 
 ```bash
 hf download vveicao/redirect4d-bench \
