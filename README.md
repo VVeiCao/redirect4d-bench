@@ -28,7 +28,7 @@ The evaluation script automatically uses these two environments if they exist.
 
 ## Sample Quick View
 
-Download the public sample:
+Download the public sample, about 2 GB:
 
 ```bash
 hf download vveicao/redirect4d-bench \
