@@ -90,7 +90,7 @@ def main() -> None:
     for flag in ("point_radius_px", "image_height", "image_width", "fps"):
         value = getattr(args, flag)
         if value is not None:
-            cmd.extend(["--" + flag.replace("_", "-"), str(value)])
+            cmd.extend(["--" + flag, str(value)])
     if args.output_root is not None:
         cmd.extend(["--output-rendering-base", str(args.output_root.resolve())])
 
