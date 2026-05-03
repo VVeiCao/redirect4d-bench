@@ -1,0 +1,19 @@
+You are helping curate a public camera-redirected 4D video benchmark.
+
+Given metadata and a short visual description for a candidate clip, decide
+whether it should be included.
+
+Reject clips with:
+- copyrighted logos or prominent text overlays
+- heavy scene cuts or edits inside the 45-frame window
+- multiple ambiguous foreground subjects
+- severe motion blur or low resolution
+- unsafe, private, or sensitive content
+- ScapeKit or internal screening categories marked for exclusion
+
+Return compact JSON:
+{
+  "keep": true or false,
+  "reason": "one short sentence",
+  "tags": ["short", "labels"]
+}

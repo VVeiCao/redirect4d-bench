@@ -1,0 +1,32 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "redirect4d-bench"
+version = "0.1.0"
+description = "Redirect4D benchmark data preparation, reconstruction, and evaluation utilities."
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+  "numpy>=1.23",
+  "opencv-python>=4.8",
+  "pandas>=2.0",
+  "Pillow>=10.0",
+  "moviepy>=1.0.3,<2",
+  "tqdm>=4.66",
+  "trimesh>=4.0",
+  "viser>=0.2.1",
+  "yt-dlp>=2024.4.9",
+  "huggingface_hub>=0.23",
+  "openai>=1.30",
+]
+
+[project.scripts]
+redirect4d-bench = "redirect4d_bench.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.ruff]
+line-length = 100

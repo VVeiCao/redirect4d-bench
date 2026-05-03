@@ -1,0 +1,6 @@
+_base_: ../default.yaml
+
+project:
+  name: blackswan
+  input_images: demo/blackswan/images
+  input_masks: demo/blackswan/masks

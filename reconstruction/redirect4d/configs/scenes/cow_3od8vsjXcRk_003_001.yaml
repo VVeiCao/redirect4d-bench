@@ -1,0 +1,6 @@
+_base_: ../default.yaml
+
+project:
+  name: cow_3od8vsjXcRk_003_001
+  input_images: /data/weicao3/projects/Animal-in-Motion/data_for_fo4d/cow_3od8vsjXcRk_003_001/images
+  input_masks: /data/weicao3/projects/Animal-in-Motion/data_for_fo4d/cow_3od8vsjXcRk_003_001/masks

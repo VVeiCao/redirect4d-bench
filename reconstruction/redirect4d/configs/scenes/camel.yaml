@@ -1,0 +1,6 @@
+_base_: ../default.yaml
+
+project:
+  name: camel
+  input_images: demo/camel/images
+  input_masks: demo/camel/masks
