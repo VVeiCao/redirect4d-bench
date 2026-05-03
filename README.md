@@ -12,17 +12,6 @@ in the target view. Redirect4D-Bench provides real dynamic-video cases with
 pseudo-GT masks so that camera following and subject placement can be measured
 directly.
 
-## At A Glance
-
-| Item | Value |
-| --- | --- |
-| Tracks | 62 real monocular source clips |
-| Cases | 83 source-trajectory pairs |
-| Length | 45 frames per case |
-| Resolution / FPS | 832x480 at 15 fps |
-| Released assets | source masks, 4D point clouds, target trajectories, target depth, target pseudo-GT masks, prompts, metadata |
-| Metrics in this repo | object fidelity / localization, camera-pose accuracy |
-
 ## Install
 
 ```bash
