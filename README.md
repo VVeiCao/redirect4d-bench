@@ -3,6 +3,26 @@
 Redirect4D-Bench is a benchmark for evaluating camera redirection on monocular
 dynamic videos.
 
+![Redirect4D-Bench overview](assets/benchmark_overview.png)
+
+Camera redirection is not only a video-quality problem: a successful output
+must follow the requested camera path while preserving the foreground subject
+in the target view. Redirect4D-Bench provides real dynamic-video cases with
+4D point clouds, target trajectories, rendered target depth, and target
+pseudo-GT masks so that camera following and subject placement can be measured
+directly.
+
+## At A Glance
+
+| Item | Value |
+| --- | --- |
+| Tracks | 62 real monocular source clips |
+| Cases | 83 source-trajectory pairs |
+| Length | 45 frames per case |
+| Resolution / FPS | 832x480 at 15 fps |
+| Released assets | source masks, 4D point clouds, target trajectories, target depth, target pseudo-GT masks, prompts, metadata |
+| Metrics in this repo | object fidelity / localization, camera-pose accuracy |
+
 ## Install
 
 ```bash
@@ -14,17 +34,22 @@ conda activate redirect4d-bench
 ```
 
 The base environment is enough for downloading data, validating folders, and
-previewing the sample. Full evaluation and scale-up use two auxiliary
-environments, created only when needed:
+previewing the dataset. Evaluation and scale-up use two extra environments:
 
 ```bash
 bash scripts/env/create_sam3_env.sh redirect4d-sam3
 bash scripts/env/create_reconstruction_env.sh redirect4d-recon
+bash scripts/env/check_all_envs.sh
 ```
 
-The evaluation script automatically uses these two environments if they exist.
+For scale-up or reconstruction, also prepare the large reconstruction
+checkpoints:
 
-## Sample Quick View
+```bash
+bash scripts/models/download_reconstruction_checkpoints.sh required
+```
+
+## Dataset Quick Review
 
 Download the public sample, about 2 GB:
 
@@ -45,25 +70,24 @@ python scripts/visualization/serve_pointcloud_viser.py \
 
 Forward port `8091` and open it in your browser.
 
-The preview shows:
-
-- animated foreground/background 4D point clouds
-- source video when it exists in the selected dataset root
-- source video mask
-- target camera trajectory
-- target mask and target depth for the active trajectory
+The viewer shows the animated foreground/background 4D point clouds, source
+video if it exists in the selected dataset root, source mask, active target
+trajectory, target mask, and target depth.
 
 ![Redirect4D-Bench Viser sample interface](assets/viser_interface.png)
 
 ## Full Dataset
 
-Download public assets, about 54 GB:
+Download the public benchmark assets, about 54 GB:
 
 ```bash
 hf download vveicao/redirect4d-bench \
   --repo-type dataset \
   --local-dir data/redirect4d_bench
 ```
+
+The public full dataset does not include source RGB videos. The two sample
+tracks include source RGB only for quick preview.
 
 Public layout:
 
@@ -78,6 +102,9 @@ data/redirect4d_bench/
     masks/*.png
     mask_video.mp4
     pointcloud/
+      global_background.ply
+      <frame>/*.ply
+      <frame>/*.npz
     redirected/<trajectory>/
       trajectory.json
       mask.mp4
@@ -85,19 +112,30 @@ data/redirect4d_bench/
       prompt.txt
 ```
 
-Meaning:
+![Redirect4D-Bench case bundle](assets/case_bundle.png)
 
-- `mask_video.mp4`, `masks/*.png`: source video mask
-- `pointcloud/`: released 4D point clouds
-- `trajectory.json`: target camera trajectory
-- `redirected/<trajectory>/mask.mp4`: target pseudo-GT mask
-- `redirected/<trajectory>/depth.mp4`: target pseudo-GT depth
-- `prompt.txt`: frozen prompt used by the generation pipeline
-- `metadata.json`, `tracks.jsonl`: YouTube id, crop boxes, frame ids, fps,
-  camera intrinsics, and trajectory names for recovering source clips
+File meanings:
 
-Original source RGB is not redistributed. The public metadata can be used to
-recover source clips from YouTube:
+- `metadata.json`, `tracks.jsonl`, `cases.jsonl`: case metadata, YouTube ids,
+  crop boxes, frame ids, camera intrinsics, and trajectory names.
+- `mask_video.mp4`, `masks/*.png`: source foreground masks.
+- `pointcloud/`: released 4D point-cloud assets.
+- `trajectory.json`: requested target camera path.
+- `redirected/<trajectory>/depth.mp4`: rendered target-view pseudo-GT depth.
+- `redirected/<trajectory>/mask.mp4`: refined target pseudo-GT mask.
+- `prompt.txt`: frozen prompt used by the generation pipeline.
+
+If you have access to the canonical source RGB package, install it with:
+
+```bash
+python scripts/data/install_restricted_sources.py \
+  --source-dir /path/to/redirect4d_bench_restricted \
+  --out data/reconstructed_source_tracks \
+  --overwrite
+```
+
+The public metadata can also be used to recover source clips from original
+videos:
 
 ```bash
 python scripts/data/download_original_videos.py \
@@ -110,13 +148,8 @@ python scripts/data/reconstruct_source_tracks.py \
   --output-root data/reconstructed_source_tracks
 ```
 
-The recovered RGB matches the canonical source used to construct the
-benchmark at high quality (typical PSNR around 38 dB on bear/elephant
-samples).
-
-YouTube access depends on the user's network environment. If YouTube blocks
-the download with bot/login verification, request the canonical source RGB
-package from `dave.caowei@gmail.com`.
+YouTube access depends on the user's network environment. If YouTube blocks the
+download with bot/login verification, use the canonical source package instead.
 
 Validate the local data:
 
@@ -128,8 +161,7 @@ python scripts/data/validate_dataset.py \
 
 ### Dataset Visualization
 
-The Viser only reads the folder passed to `--dataset-root`. For the public full
-dataset, the source video panel stays empty because source RGB is not included.
+The Viser reads only the folder passed to `--dataset-root`.
 
 ```bash
 python scripts/visualization/serve_pointcloud_viser.py \
@@ -137,18 +169,16 @@ python scripts/visualization/serve_pointcloud_viser.py \
   --port 8091
 ```
 
+For the public full dataset, the source-video panel stays empty because source
+RGB is not included. If you pass a sample or local full-data folder that
+contains `video.mp4`, the viewer displays source RGB as well.
+
 ## Evaluation
 
 This public repo evaluates the Redirect4D-Bench object fidelity/localization
 and camera-pose accuracy metrics. FID, FVD, CLIP, and VBench are not run here.
 
-Install the evaluation environments once before running the benchmark:
-
-```bash
-bash scripts/env/create_sam3_env.sh redirect4d-sam3
-bash scripts/env/create_reconstruction_env.sh redirect4d-recon
-bash scripts/env/check_all_envs.sh
-```
+![Redirect4D-Bench metric protocol](assets/metric_protocol.png)
 
 Generated videos should be named by case:
 
@@ -172,51 +202,58 @@ python scripts/evaluation/evaluate_user_method.py \
 ```
 
 By default this reads `data/redirect4d_bench`, evaluates every `.mp4` in
-`my_method/VIDEOS`, and writes each run to a new timestamped folder:
+`my_method/VIDEOS`, and writes each run to:
 
 ```text
 outputs/my_method/YYYYMMDD_HHMMSS/
 ```
 
-Camera accuracy needs the reconstruction environment. For object fidelity,
-methods submit only generated RGB videos; the evaluation script extracts their
-target masks with the benchmark SAM3 propagation step and compares them to the
-dataset pseudo-GT target mask. The extracted generated-video masks are written
-next to the submitted videos:
+Object fidelity expects only generated RGB videos from a submitted method. The
+evaluation script extracts generated-video masks with the benchmark SAM3
+propagation step, writes them next to the submitted videos, and compares them
+to the dataset target pseudo-GT masks:
 
 ```text
 my_method/mask/<track>_<trajectory>.mp4
 ```
 
+Camera-pose accuracy reconstructs the camera path from each generated video
+with the pinned reconstruction stack and compares it to the target trajectory.
+
 ## Scale Up
 
-Scale-up creates a new track in the same format as the released dataset.
-For large-scale video search, downloading, and candidate filtering, please
-refer to the [Animal-in-Motion](https://github.com/briannlongzhao/Animal-in-Motion)
-collection pipeline and bring the selected source video and source mask into
-this benchmark pipeline.
+Scale-up creates a new track in the same format as the released dataset. Users
+prepare a source RGB video and a matching source foreground mask, then run the
+construction pipeline.
+
+![Redirect4D-Bench construction pipeline](assets/construction_pipeline.png)
+
+The data-generation flow is:
 
 ```text
 source RGB video + source mask
 -> 45-frame source clip and aligned source masks
--> source-scene reconstruction: foreground 4D point clouds + VIPE/LyRA background
+-> source-scene reconstruction: completed foreground 4D point clouds + VIPE/LyRA background
 -> target trajectory definition
--> pre-Wan target render: rendered_images.mp4, rendered_depths.mp4, rendered_mask.mp4
--> prompt generation / prompt freezing
+-> target render: rendered_images.mp4, rendered_depths.mp4, rendered_mask.mp4
+-> prompt generation
 -> Wan target RGB generation
 -> MaskRefine target pseudo-GT mask from rough mask + post-Wan RGB
--> release-style case folder: source mask, point clouds, trajectory, depth, target mask, prompt
+-> release-style case folder
 ```
+
+For large-scale video search, downloading, and candidate filtering, refer to
+the [Animal-in-Motion](https://github.com/briannlongzhao/Animal-in-Motion)
+collection pipeline and bring the selected source video and source mask into
+this benchmark pipeline.
 
 Concrete sample command:
 
 ```bash
-SAMPLE_TRACK=data/redirect4d_bench/sample/tracks/bear_NnAlfavy2us_003_001_seq1
-
 python scripts/pipeline/run_scale_up_case.py \
   --case-name bear_sample_scaleup \
-  --input-video $SAMPLE_TRACK/video.mp4 \
-  --mask-video $SAMPLE_TRACK/mask_video.mp4 \
+  --input-video data/redirect4d_bench/sample/tracks/bear_NnAlfavy2us_003_001_seq1/video.mp4 \
+  --mask-video data/redirect4d_bench/sample/tracks/bear_NnAlfavy2us_003_001_seq1/mask_video.mp4 \
   --yaw 120 \
   --pitch 0 \
   --roll 0 \
@@ -240,10 +277,15 @@ python scripts/pipeline/run_scale_up_case.py \
   --gpu 0
 ```
 
-The final release-style case is written under
-`outputs/scale_up/<case-name>/release/tracks/<case-name>`. Wan generates a
-prompt from the source clip during the run and stores it as `prompt.txt` in the
-final case. For more options, see [docs/scale_up.md](docs/scale_up.md).
+The final release-style case is written under:
+
+```text
+outputs/scale_up/<case-name>/release/tracks/<case-name>
+```
+
+Wan generates a prompt from the source clip during the run and stores it as
+`prompt.txt` in the final case. For more options, see
+[docs/scale_up.md](docs/scale_up.md).
 
 ## License
 
