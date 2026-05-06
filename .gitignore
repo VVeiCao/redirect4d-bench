@@ -80,6 +80,7 @@ wandb/
 
 # README showcase assets (tracked deliberately)
 !assets/wolf/*.gif
+!assets/wolf/*.png
 !assets/logo.png
 *.obj
 *.glb

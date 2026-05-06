@@ -35,27 +35,29 @@
 
 **Camera redirection** takes a monocular source video and replays the same dynamic event along a user-requested camera trajectory. **High video-metric scores do not imply successful camera redirection.** Per-column CLIP/VBench winners scatter across baselines, yet none of those winning videos completes the task. Only FreeOrbit4D follows the requested trajectory while keeping the wolf intact, matching the human verdict.
 
-<table align="center" width="100%">
+<div align="center">
+<table>
   <tr>
-    <td width="50%" align="center"><img src="assets/wolf/source.gif" width="100%" alt="Source video"></td>
-    <td width="50%" align="center"><a href="https://vveicao.github.io/projects/redirect4d-bench/"><img src="assets/viser_interface.png" width="100%" alt="Interactive 4D viewer"></a></td>
+    <td align="center"><b>Source Video</b><br><sub>wolf, yaw &minus;80, scale 0.9</sub></td>
+    <td align="center"><b>Interactive 4D</b><br><sub>(click to explore)</sub></td>
   </tr>
   <tr>
-    <td align="center"><sub>Source video &middot; wolf, yaw &minus;80, scale 0.9</sub></td>
-    <td align="center"><sub>4D reconstruction &middot; <a href="https://vveicao.github.io/projects/redirect4d-bench/">interactive viewer on project page</a> (<span><b><span title="target">blue</span></b></span> = target trajectory, <b>red</b> = source-video trajectory)</sub></td>
+    <td align="center"><img src="assets/wolf/source.gif" width="380" alt="Source video"></td>
+    <td align="center"><a href="https://vveicao.github.io/projects/redirect4d-bench/web_assets/viewers/wolf.html"><img src="assets/wolf/viewer.png" width="380" alt="Interactive 4D viewer"></a></td>
   </tr>
 </table>
+</div>
 
-Each method is replayed below along the same wolf trajectory. Per-column best in **bold**.
+Each method is replayed along the same wolf trajectory. Per-column best in **bold**.
 
-<table align="center">
+<div align="center">
+<table>
   <thead>
     <tr>
       <th rowspan="2">Method</th>
-      <th rowspan="2">Output</th>
       <th colspan="3">CLIP &uarr;</th>
       <th colspan="7">VBench &uarr;</th>
-      <th rowspan="2">Human Eval</th>
+      <th rowspan="2">Human</th>
     </tr>
     <tr>
       <th>T</th><th>F</th><th>V</th>
@@ -65,36 +67,56 @@ Each method is replayed below along the same wolf trajectory. Per-column best in
   <tbody>
     <tr>
       <td><b>TrajectoryCrafter</b></td>
-      <td><img src="assets/wolf/tc.gif" width="200" alt="TrajectoryCrafter"></td>
       <td>0.284</td><td>0.948</td><td>0.802</td>
       <td>0.733</td><td>0.903</td><td>0.933</td><td>0.964</td><td>0.440</td><td><b>0.741</b></td><td>0.265</td>
-      <td>😞 <sub>distorts the wolf body</sub></td>
+      <td>😞</td>
     </tr>
     <tr>
       <td><b>ReCamMaster</b></td>
-      <td><img src="assets/wolf/rcm.gif" width="200" alt="ReCamMaster"></td>
       <td><b>0.314</b></td><td><b>0.967</b></td><td><b>0.920</b></td>
       <td><b>0.898</b></td><td><b>0.938</b></td><td>0.944</td><td>0.970</td><td><b>0.569</b></td><td>0.715</td><td><b>0.313</b></td>
-      <td>😞 <sub>camera barely moves; ignores the requested arc</sub></td>
+      <td>😞</td>
     </tr>
     <tr>
       <td><b>GEN3C</b></td>
-      <td><img src="assets/wolf/gen3c.gif" width="200" alt="GEN3C"></td>
       <td>0.288</td><td>0.951</td><td>0.864</td>
       <td>0.708</td><td>0.919</td><td><b>0.948</b></td><td><b>0.982</b></td><td>0.546</td><td>0.660</td><td>0.293</td>
-      <td>😞 <sub>subject placed at the wrong target-view location</sub></td>
+      <td>😞</td>
     </tr>
     <tr>
       <td><b>FreeOrbit4D</b></td>
-      <td><img src="assets/wolf/r4d.gif" width="200" alt="FreeOrbit4D"></td>
       <td>0.304</td><td>0.954</td><td>0.856</td>
       <td>0.825</td><td>0.920</td><td>0.932</td><td>0.977</td><td>0.531</td><td>0.565</td><td>0.293</td>
-      <td>😊 <sub>only correct &middot; follows the path; subject intact</sub></td>
+      <td>😊</td>
     </tr>
   </tbody>
 </table>
+</div>
 
-<sub><b>CLIP-T/F/V</b>: text, adjacent-frame, and source-video consistency. <b>VBench</b>: SC subject, BG background, TF temporal-flickering, MS motion-smoothness, AQ aesthetic, IQ imaging, OC overall consistency. The CLIP/VBench winners scatter across all four methods, while the human verdict points to the only one that completes the redirection.</sub>
+<sub><b>CLIP-T/F/V</b>: text, adjacent-frame, and source-video consistency. <b>VBench</b>: SC subject, BG background, TF temporal-flickering, MS motion-smoothness, AQ aesthetic, IQ imaging, OC overall consistency.</sub>
+
+<div align="center">
+<table>
+  <tr>
+    <td align="center"><b>TrajectoryCrafter</b></td>
+    <td align="center"><b>ReCamMaster</b></td>
+    <td align="center"><b>GEN3C</b></td>
+    <td align="center"><b>FreeOrbit4D</b></td>
+  </tr>
+  <tr>
+    <td align="center"><img src="assets/wolf/tc.gif" width="200" alt="TrajectoryCrafter"></td>
+    <td align="center"><img src="assets/wolf/rcm.gif" width="200" alt="ReCamMaster"></td>
+    <td align="center"><img src="assets/wolf/gen3c.gif" width="200" alt="GEN3C"></td>
+    <td align="center"><img src="assets/wolf/r4d.gif" width="200" alt="FreeOrbit4D"></td>
+  </tr>
+  <tr>
+    <td align="center">😞<br><sub>distorts the wolf body</sub></td>
+    <td align="center">😞<br><sub>camera barely moves</sub></td>
+    <td align="center">😞<br><sub>wrong target placement</sub></td>
+    <td align="center">😊<br><sub>only correct redirection</sub></td>
+  </tr>
+</table>
+</div>
 
 > Full interactive showcase (4D viewer for every case, baseline gallery, per-case metric tables) on the [project page](https://vveicao.github.io/projects/redirect4d-bench/).
 
