@@ -53,7 +53,7 @@
 Each method is replayed along the same wolf trajectory. Per-column best in **red**.
 
 <p align="center">
-  <img src="assets/wolf/metrics_table.png" alt="Wolf motivation: per-method CLIP / VBench / Human evaluation" width="100%">
+  <img src="assets/wolf/metrics_table.gif" alt="Wolf motivation: per-method CLIP / VBench / Human evaluation" width="100%">
 </p>
 
 <sub><b>CLIP-T/F/V</b>: text, adjacent-frame, and source-video consistency. <b>VBench</b>: SC subject, BG background, TF temporal-flickering, MS motion-smoothness, AQ aesthetic, IQ imaging, OC overall consistency. The CLIP/VBench winners scatter across all four methods, while the human verdict points to the only one that completes the redirection.</sub>
