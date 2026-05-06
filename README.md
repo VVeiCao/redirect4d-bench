@@ -33,12 +33,14 @@
 
 ## Motivation
 
-**Camera redirection** takes a monocular source video and replays the same dynamic event along a user-requested camera trajectory. **High video-metric scores do not imply successful camera redirection.** Per-column CLIP/VBench winners scatter across baselines, yet none of those winning videos completes the task. Only FreeOrbit4D follows the requested trajectory while keeping the wolf intact, matching the human verdict.
+**Camera redirection** takes a monocular source video and replays the same dynamic event along a user-requested camera trajectory.
+
+**High video-metric scores do not imply successful camera redirection.** Per-column CLIP/VBench winners scatter across baselines, yet none of those winning videos completes the task. Only FreeOrbit4D follows the requested trajectory while keeping the wolf intact, matching the human verdict.
 
 <div align="center">
 <table>
   <tr>
-    <td align="center"><b>Source Video</b><br><sub>wolf, yaw &minus;80, scale 0.9</sub></td>
+    <td align="center"><b>Source Video</b></td>
     <td align="center"><b>Interactive 4D</b><br><sub>(click to explore)</sub></td>
   </tr>
   <tr>
@@ -48,73 +50,48 @@
 </table>
 </div>
 
-Each method is replayed along the same wolf trajectory. Per-column best in **bold**.
+Each method is replayed along the same wolf trajectory. Per-row best in **bold**.
 
 <div align="center">
 <table>
   <thead>
     <tr>
-      <th rowspan="2">Method</th>
-      <th colspan="3">CLIP &uarr;</th>
-      <th colspan="7">VBench &uarr;</th>
-      <th rowspan="2">Human</th>
-    </tr>
-    <tr>
-      <th>T</th><th>F</th><th>V</th>
-      <th>SC</th><th>BG</th><th>TF</th><th>MS</th><th>AQ</th><th>IQ</th><th>OC</th>
+      <th></th>
+      <th align="center">TrajectoryCrafter</th>
+      <th align="center">ReCamMaster</th>
+      <th align="center">GEN3C</th>
+      <th align="center">FreeOrbit4D</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td><b>TrajectoryCrafter</b></td>
-      <td>0.284</td><td>0.948</td><td>0.802</td>
-      <td>0.733</td><td>0.903</td><td>0.933</td><td>0.964</td><td>0.440</td><td><b>0.741</b></td><td>0.265</td>
-      <td>😞</td>
+      <td><b>Output</b></td>
+      <td align="center"><img src="assets/wolf/tc.gif" width="200" alt="TrajectoryCrafter"></td>
+      <td align="center"><img src="assets/wolf/rcm.gif" width="200" alt="ReCamMaster"></td>
+      <td align="center"><img src="assets/wolf/gen3c.gif" width="200" alt="GEN3C"></td>
+      <td align="center"><img src="assets/wolf/r4d.gif" width="200" alt="FreeOrbit4D"></td>
     </tr>
+    <tr><td colspan="5"><sub><b>CLIP</b> &uarr; — text / adjacent-frame / source-video consistency</sub></td></tr>
+    <tr><td>CLIP-T &uarr;</td><td align="center">0.284</td><td align="center"><b>0.314</b></td><td align="center">0.288</td><td align="center">0.304</td></tr>
+    <tr><td>CLIP-F &uarr;</td><td align="center">0.948</td><td align="center"><b>0.967</b></td><td align="center">0.951</td><td align="center">0.954</td></tr>
+    <tr><td>CLIP-V &uarr;</td><td align="center">0.802</td><td align="center"><b>0.920</b></td><td align="center">0.864</td><td align="center">0.856</td></tr>
+    <tr><td colspan="5"><sub><b>VBench</b> &uarr; — SC subject, BG background, TF temporal-flickering, MS motion-smoothness, AQ aesthetic, IQ imaging, OC overall consistency</sub></td></tr>
+    <tr><td>VBench-SC &uarr;</td><td align="center">0.733</td><td align="center"><b>0.898</b></td><td align="center">0.708</td><td align="center">0.825</td></tr>
+    <tr><td>VBench-BG &uarr;</td><td align="center">0.903</td><td align="center"><b>0.938</b></td><td align="center">0.919</td><td align="center">0.920</td></tr>
+    <tr><td>VBench-TF &uarr;</td><td align="center">0.933</td><td align="center">0.944</td><td align="center"><b>0.948</b></td><td align="center">0.932</td></tr>
+    <tr><td>VBench-MS &uarr;</td><td align="center">0.964</td><td align="center">0.970</td><td align="center"><b>0.982</b></td><td align="center">0.977</td></tr>
+    <tr><td>VBench-AQ &uarr;</td><td align="center">0.440</td><td align="center"><b>0.569</b></td><td align="center">0.546</td><td align="center">0.531</td></tr>
+    <tr><td>VBench-IQ &uarr;</td><td align="center"><b>0.741</b></td><td align="center">0.715</td><td align="center">0.660</td><td align="center">0.565</td></tr>
+    <tr><td>VBench-OC &uarr;</td><td align="center">0.265</td><td align="center"><b>0.313</b></td><td align="center">0.293</td><td align="center">0.293</td></tr>
+    <tr><td colspan="5"><sub><b>Human Evaluation</b></sub></td></tr>
     <tr>
-      <td><b>ReCamMaster</b></td>
-      <td><b>0.314</b></td><td><b>0.967</b></td><td><b>0.920</b></td>
-      <td><b>0.898</b></td><td><b>0.938</b></td><td>0.944</td><td>0.970</td><td><b>0.569</b></td><td>0.715</td><td><b>0.313</b></td>
-      <td>😞</td>
-    </tr>
-    <tr>
-      <td><b>GEN3C</b></td>
-      <td>0.288</td><td>0.951</td><td>0.864</td>
-      <td>0.708</td><td>0.919</td><td><b>0.948</b></td><td><b>0.982</b></td><td>0.546</td><td>0.660</td><td>0.293</td>
-      <td>😞</td>
-    </tr>
-    <tr>
-      <td><b>FreeOrbit4D</b></td>
-      <td>0.304</td><td>0.954</td><td>0.856</td>
-      <td>0.825</td><td>0.920</td><td>0.932</td><td>0.977</td><td>0.531</td><td>0.565</td><td>0.293</td>
-      <td>😊</td>
+      <td><b>Verdict</b></td>
+      <td align="center">😞<br><sub>distorts the wolf body</sub></td>
+      <td align="center">😞<br><sub>camera barely moves</sub></td>
+      <td align="center">😞<br><sub>wrong target placement</sub></td>
+      <td align="center">😊<br><sub>only correct redirection</sub></td>
     </tr>
   </tbody>
-</table>
-</div>
-
-<sub><b>CLIP-T/F/V</b>: text, adjacent-frame, and source-video consistency. <b>VBench</b>: SC subject, BG background, TF temporal-flickering, MS motion-smoothness, AQ aesthetic, IQ imaging, OC overall consistency.</sub>
-
-<div align="center">
-<table>
-  <tr>
-    <td align="center"><b>TrajectoryCrafter</b></td>
-    <td align="center"><b>ReCamMaster</b></td>
-    <td align="center"><b>GEN3C</b></td>
-    <td align="center"><b>FreeOrbit4D</b></td>
-  </tr>
-  <tr>
-    <td align="center"><img src="assets/wolf/tc.gif" width="200" alt="TrajectoryCrafter"></td>
-    <td align="center"><img src="assets/wolf/rcm.gif" width="200" alt="ReCamMaster"></td>
-    <td align="center"><img src="assets/wolf/gen3c.gif" width="200" alt="GEN3C"></td>
-    <td align="center"><img src="assets/wolf/r4d.gif" width="200" alt="FreeOrbit4D"></td>
-  </tr>
-  <tr>
-    <td align="center">😞<br><sub>distorts the wolf body</sub></td>
-    <td align="center">😞<br><sub>camera barely moves</sub></td>
-    <td align="center">😞<br><sub>wrong target placement</sub></td>
-    <td align="center">😊<br><sub>only correct redirection</sub></td>
-  </tr>
 </table>
 </div>
 
