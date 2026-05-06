@@ -1,16 +1,68 @@
-# Redirect4D-Bench
+<h1 align="center">Redirect4D-Bench</h1>
 
-Redirect4D-Bench is a benchmark for evaluating camera redirection on monocular
-dynamic videos.
+<p align="center">
+  <strong>A Dataset and Benchmark for Camera Redirection of Monocular Dynamic Videos with Pseudo-4D References</strong>
+</p>
+
+<p align="center">
+  <a href="https://vveicao.github.io/">Wei Cao</a><sup>1</sup> ·
+  <a href="https://haoz19.github.io/">Hao Zhang</a><sup>1</sup> ·
+  <a href="https://tangjiapeng.github.io/">Jiapeng Tang</a><sup>2</sup> ·
+  <a href="https://yulunwu0108.github.io/">Yulun Wu</a><sup>1</sup> ·
+  <a href="https://www.yingying.li/">Yingying Li</a><sup>1</sup> ·
+  <a href="https://ningyu1991.github.io/">Ning Yu</a><sup>3</sup> ·
+  <a href="https://shenlong.web.illinois.edu/">Shenlong Wang</a><sup>1</sup> ·
+  <a href="https://yaoyaoliu.web.illinois.edu/">Yaoyao Liu</a><sup>1</sup>
+</p>
+
+<p align="center">
+  <sup>1</sup>University of Illinois Urbana-Champaign &nbsp;·&nbsp;
+  <sup>2</sup>Technical University of Munich &nbsp;·&nbsp;
+  <sup>3</sup>Netflix
+</p>
+
+<p align="center">
+  <a href="https://vveicao.github.io/projects/redirect4d-bench/"><img src="https://img.shields.io/badge/Project-Page-2563eb?style=flat-square" alt="Project Page"></a>
+  <a href="#"><img src="https://img.shields.io/badge/arXiv-Coming%20Soon-b31b1b?style=flat-square&logo=arxiv&logoColor=white" alt="arXiv"></a>
+  <a href="https://github.com/VVeiCao/redirect4d-bench"><img src="https://img.shields.io/badge/Code-GitHub-181717?style=flat-square&logo=github&logoColor=white" alt="Code"></a>
+  <a href="https://huggingface.co/datasets/vveicao/redirect4d-bench"><img src="https://img.shields.io/badge/%F0%9F%A4%97%20Dataset-HuggingFace-ffcc4d?style=flat-square" alt="Dataset"></a>
+</p>
+
+> **TL;DR:** Redirect4D-Bench is a dataset and benchmark for camera redirection of monocular dynamic videos, with per-clip pseudo-4D references that directly measure camera following and subject placement.
+
+## Motivation
+
+**Camera redirection** takes a monocular source video and replays the same dynamic event along a user-requested camera trajectory. **High video-metric scores do not imply successful camera redirection.** On the wolf comparison below, per-column CLIP/VBench winners are spread across baselines, yet none of those winning videos completes the task. Only FreeOrbit4D follows the requested trajectory while keeping the wolf intact, matching the human verdict.
+
+<table align="center">
+  <tr>
+    <td align="center" width="20%"><b>Source</b><br><sub>yaw &minus;80, scale 0.9</sub></td>
+    <td align="center" width="20%"><b>TrajectoryCrafter</b></td>
+    <td align="center" width="20%"><b>ReCamMaster</b></td>
+    <td align="center" width="20%"><b>GEN3C</b></td>
+    <td align="center" width="20%"><b>FreeOrbit4D</b></td>
+  </tr>
+  <tr>
+    <td><video src="assets/wolf/source.mp4" controls autoplay muted loop playsinline width="100%"></video></td>
+    <td><video src="assets/wolf/tc.mp4" controls autoplay muted loop playsinline width="100%"></video></td>
+    <td><video src="assets/wolf/rcm.mp4" controls autoplay muted loop playsinline width="100%"></video></td>
+    <td><video src="assets/wolf/gen3c.mp4" controls autoplay muted loop playsinline width="100%"></video></td>
+    <td><video src="assets/wolf/r4d.mp4" controls autoplay muted loop playsinline width="100%"></video></td>
+  </tr>
+  <tr>
+    <td align="center"><sub>input</sub></td>
+    <td align="center"><sub>😞 distorts the wolf body</sub></td>
+    <td align="center"><sub>😞 camera barely moves</sub></td>
+    <td align="center"><sub>😞 wrong target placement</sub></td>
+    <td align="center"><sub>😊 only correct redirection</sub></td>
+  </tr>
+</table>
+
+> Browse the full interactive showcase (4D viewer, more cases, baseline gallery, metric tables) on the [project page](https://vveicao.github.io/projects/redirect4d-bench/).
+
+Redirect4D-Bench provides real dynamic-video cases with 4D point clouds, target trajectories, rendered target depth, and target pseudo-GT masks so that camera following and subject placement can be measured directly.
 
 ![Redirect4D-Bench overview](assets/benchmark_overview.png)
-
-Camera redirection is not only a video-quality problem: a successful output
-must follow the requested camera path while preserving the foreground subject
-in the target view. Redirect4D-Bench provides real dynamic-video cases with
-4D point clouds, target trajectories, rendered target depth, and target
-pseudo-GT masks so that camera following and subject placement can be measured
-directly.
 
 ## Install
 

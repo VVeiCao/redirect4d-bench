@@ -77,6 +77,9 @@ wandb/
 *.bmp
 *.tiff
 *.ply
+
+# README showcase assets (tracked deliberately)
+!assets/wolf/*.mp4
 *.obj
 *.glb
 *.npy
