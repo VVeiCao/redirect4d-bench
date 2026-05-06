@@ -79,7 +79,8 @@ wandb/
 *.ply
 
 # README showcase assets (tracked deliberately)
-!assets/wolf/*.mp4
+!assets/wolf/*.gif
+!assets/logo.png
 *.obj
 *.glb
 *.npy
