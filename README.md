@@ -50,50 +50,14 @@
 </table>
 </div>
 
-Each method is replayed along the same wolf trajectory. Per-row best in **bold**.
+Each method is replayed along the same wolf trajectory. Per-column best in **red**.
 
-<div align="center">
-<table>
-  <thead>
-    <tr>
-      <th></th>
-      <th align="center">TrajectoryCrafter</th>
-      <th align="center">ReCamMaster</th>
-      <th align="center">GEN3C</th>
-      <th align="center">FreeOrbit4D</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><b>Output</b></td>
-      <td align="center"><img src="assets/wolf/tc.gif" width="200" alt="TrajectoryCrafter"></td>
-      <td align="center"><img src="assets/wolf/rcm.gif" width="200" alt="ReCamMaster"></td>
-      <td align="center"><img src="assets/wolf/gen3c.gif" width="200" alt="GEN3C"></td>
-      <td align="center"><img src="assets/wolf/r4d.gif" width="200" alt="FreeOrbit4D"></td>
-    </tr>
-    <tr><td colspan="5"><sub><b>CLIP</b> &uarr; — text / adjacent-frame / source-video consistency</sub></td></tr>
-    <tr><td>CLIP-T &uarr;</td><td align="center">0.284</td><td align="center"><b>0.314</b></td><td align="center">0.288</td><td align="center">0.304</td></tr>
-    <tr><td>CLIP-F &uarr;</td><td align="center">0.948</td><td align="center"><b>0.967</b></td><td align="center">0.951</td><td align="center">0.954</td></tr>
-    <tr><td>CLIP-V &uarr;</td><td align="center">0.802</td><td align="center"><b>0.920</b></td><td align="center">0.864</td><td align="center">0.856</td></tr>
-    <tr><td colspan="5"><sub><b>VBench</b> &uarr; — SC subject, BG background, TF temporal-flickering, MS motion-smoothness, AQ aesthetic, IQ imaging, OC overall consistency</sub></td></tr>
-    <tr><td>VBench-SC &uarr;</td><td align="center">0.733</td><td align="center"><b>0.898</b></td><td align="center">0.708</td><td align="center">0.825</td></tr>
-    <tr><td>VBench-BG &uarr;</td><td align="center">0.903</td><td align="center"><b>0.938</b></td><td align="center">0.919</td><td align="center">0.920</td></tr>
-    <tr><td>VBench-TF &uarr;</td><td align="center">0.933</td><td align="center">0.944</td><td align="center"><b>0.948</b></td><td align="center">0.932</td></tr>
-    <tr><td>VBench-MS &uarr;</td><td align="center">0.964</td><td align="center">0.970</td><td align="center"><b>0.982</b></td><td align="center">0.977</td></tr>
-    <tr><td>VBench-AQ &uarr;</td><td align="center">0.440</td><td align="center"><b>0.569</b></td><td align="center">0.546</td><td align="center">0.531</td></tr>
-    <tr><td>VBench-IQ &uarr;</td><td align="center"><b>0.741</b></td><td align="center">0.715</td><td align="center">0.660</td><td align="center">0.565</td></tr>
-    <tr><td>VBench-OC &uarr;</td><td align="center">0.265</td><td align="center"><b>0.313</b></td><td align="center">0.293</td><td align="center">0.293</td></tr>
-    <tr><td colspan="5"><sub><b>Human Evaluation</b></sub></td></tr>
-    <tr>
-      <td><b>Verdict</b></td>
-      <td align="center">😞<br><sub>distorts the wolf body</sub></td>
-      <td align="center">😞<br><sub>camera barely moves</sub></td>
-      <td align="center">😞<br><sub>wrong target placement</sub></td>
-      <td align="center">😊<br><sub>only correct redirection</sub></td>
-    </tr>
-  </tbody>
-</table>
-</div>
+<p align="center">
+  <img src="assets/wolf/metrics_table.png" alt="Wolf motivation: per-method CLIP / VBench / Human evaluation" width="100%">
+</p>
+
+<sub><b>CLIP-T/F/V</b>: text, adjacent-frame, and source-video consistency. <b>VBench</b>: SC subject, BG background, TF temporal-flickering, MS motion-smoothness, AQ aesthetic, IQ imaging, OC overall consistency. The CLIP/VBench winners scatter across all four methods, while the human verdict points to the only one that completes the redirection.</sub>
+
 
 > Full interactive showcase (4D viewer for every case, baseline gallery, per-case metric tables) on the [project page](https://vveicao.github.io/projects/redirect4d-bench/).
 
