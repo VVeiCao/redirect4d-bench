@@ -51,7 +51,7 @@
 </table>
 </div>
 
-Each method is replayed along the same wolf trajectory. Per-column best in **red**.
+Each method is replayed along the same wolf trajectory. Per-column best is highlighted in **green**.
 
 <p align="center">
   <img src="assets/wolf/metrics_table.gif" alt="Wolf motivation: per-method CLIP / VBench / Human evaluation" width="100%">
