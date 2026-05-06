@@ -24,9 +24,10 @@
 </p>
 
 <p align="center">
-  <a href="https://vveicao.github.io/projects/redirect4d-bench/"><img src="https://img.shields.io/badge/Project-Page-2563eb?style=flat-square" alt="Project Page"></a>
-  <a href="#"><img src="https://img.shields.io/badge/arXiv-Coming%20Soon-b31b1b?style=flat-square&logo=arxiv&logoColor=white" alt="arXiv"></a>
-  <a href="https://huggingface.co/datasets/vveicao/redirect4d-bench"><img src="https://img.shields.io/badge/%F0%9F%A4%97%20Dataset-HuggingFace-ffcc4d?style=flat-square" alt="Dataset"></a>
+  <a href="assets/cao2026redirect4dbench.pdf"><img src="https://img.shields.io/badge/PDF-Download-ea580c?style=for-the-badge&logo=adobeacrobatreader&logoColor=white" alt="PDF"></a>
+  <a href="https://vision.ischool.illinois.edu/redirect4d-bench/"><img src="https://img.shields.io/badge/Project-Page-2563eb?style=for-the-badge" alt="Project Page"></a>
+  <a href="#"><img src="https://img.shields.io/badge/arXiv-Coming%20Soon-b31b1b?style=for-the-badge&logo=arxiv&logoColor=white" alt="arXiv"></a>
+  <a href="https://huggingface.co/datasets/vveicao/redirect4d-bench"><img src="https://img.shields.io/badge/%F0%9F%A4%97%20Dataset-HuggingFace-ffcc4d?style=for-the-badge" alt="Dataset"></a>
 </p>
 
 > **TL;DR:** Redirect4D-Bench is a dataset and benchmark for camera redirection of monocular dynamic videos, with per-clip pseudo-4D references that directly measure camera following and subject placement.
@@ -326,6 +327,18 @@ outputs/scale_up/<case-name>/release/tracks/<case-name>
 Wan generates a prompt from the source clip during the run and stores it as
 `prompt.txt` in the final case. For more options, see
 [docs/scale_up.md](docs/scale_up.md).
+
+## Citation
+
+If you find Redirect4D-Bench useful, please cite our work:
+
+```bibtex
+@misc{cao2026redirect4dbench,
+  title  = {Redirect4D-Bench: A Dataset and Benchmark for Camera Redirection of Monocular Dynamic Videos with Pseudo-4D References},
+  author = {Wei Cao and Hao Zhang and Jiapeng Tang and Yulun Wu and Yingying Li and Ning Yu and Shenlong Wang and Yaoyao Liu},
+  year   = {2026},
+}
+```
 
 ## License
 
