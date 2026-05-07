@@ -3,7 +3,7 @@
 </p>
 
 <p align="center">
-  <strong>A Dataset and Benchmark for Camera Redirection of Monocular Dynamic Videos with Pseudo-4D References</strong>
+  <strong>A Scalable Benchmark for Camera Redirection of Monocular Dynamic Videos with Pseudo-4D Ground Truth</strong>
 </p>
 
 <p align="center">
@@ -30,7 +30,7 @@
   <a href="https://huggingface.co/datasets/vveicao/redirect4d-bench"><img src="https://img.shields.io/badge/%F0%9F%A4%97%20Dataset-HuggingFace-ffcc4d?style=for-the-badge" alt="Dataset"></a>
 </p>
 
-> **TL;DR:** Redirect4D-Bench is a dataset and benchmark for camera redirection of monocular dynamic videos, with per-clip pseudo-4D references that directly measure camera following and subject placement.
+> **TL;DR:** Redirect4D-Bench is a scalable benchmark for camera redirection of monocular dynamic videos, with per-clip pseudo-4D ground truth that directly measures camera following and subject placement.
 
 ## Motivation
 
@@ -334,7 +334,7 @@ If you find Redirect4D-Bench useful, please cite our work:
 
 ```bibtex
 @misc{cao2026redirect4dbench,
-  title  = {Redirect4D-Bench: A Dataset and Benchmark for Camera Redirection of Monocular Dynamic Videos with Pseudo-4D References},
+  title  = {Redirect4D-Bench: A Scalable Benchmark for Camera Redirection of Monocular Dynamic Videos with Pseudo-4D Ground Truth},
   author = {Wei Cao and Hao Zhang and Jiapeng Tang and Yulun Wu and Yingying Li and Ning Yu and Shenlong Wang and Yaoyao Liu},
   year   = {2026},
 }
