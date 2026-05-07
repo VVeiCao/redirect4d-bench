@@ -2,9 +2,7 @@
   <img src="assets/logo.png" alt="Redirect4D-Bench" width="85%">
 </p>
 
-<p align="center">
-  <strong>A Scalable Benchmark for Camera Redirection of Monocular Dynamic Videos with Pseudo-4D Ground Truth</strong>
-</p>
+<h2 align="center">A Scalable Benchmark for Camera Redirection of Monocular Dynamic Videos with Pseudo-4D Ground Truth</h2>
 
 <p align="center">
   <a href="https://vveicao.github.io/">Wei Cao</a><sup>1</sup> ·
