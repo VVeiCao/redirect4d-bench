@@ -1,0 +1,67 @@
+# ============================================================================
+# FreeOrbit4D 依赖
+# Python 3.10 | PyTorch 2.4.0+cu121
+#
+# 注意：以下包通过 setup_env.sh 单独安装，不在此列出：
+#   torch, torchvision, torchaudio, xformers, pytorch3d
+#   transformers, accelerate, clip, sdata
+#   DiffSynth-Studio (diffsynth), generative-models (sgm)
+# ============================================================================
+
+# --- 基础数值 ---
+numpy>=1.26
+scipy>=1.10.1
+
+# --- 深度学习工具 ---
+einops>=0.6.1
+timm>=0.9.2
+kornia==0.6.9
+fairscale>=0.4.13
+
+# --- Transformers 生态 ---
+peft>=0.18.0
+sentencepiece
+protobuf
+safetensors
+
+# --- 视觉与图像 ---
+opencv-python>=4.6.0
+Pillow>=9.5.0
+imageio[ffmpeg]
+imageio[pyav]
+rembg
+onnxruntime
+
+# --- 3D 处理 ---
+open3d
+trimesh
+
+# --- 可视化 ---
+matplotlib>=3.7.2
+viser>=0.2.1
+splines
+
+# --- sgm 运行时依赖（generative-models 以 --no-deps 安装）---
+open-clip-torch>=2.20.0
+invisible-watermark>=0.2.0
+pytorch-lightning==2.0.1
+torchmetrics>=1.0.1
+
+# --- DiffSynth 运行时依赖（DiffSynth-Studio 以 --no-deps 安装）---
+modelscope
+controlnet-aux==0.0.7
+qwen-vl-utils
+datasets
+
+# --- 交互式标注 (SAM2 + Gradio) ---
+gradio>=4.0
+loguru
+
+# --- 配置与工具 ---
+omegaconf>=2.3.0
+pyyaml>=6.0.1
+natsort>=8.4.0
+tqdm>=4.65.0
+fire>=0.5.0
+ninja>=1.11.1
+iopath
